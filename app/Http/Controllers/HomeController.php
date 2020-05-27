@@ -14,7 +14,7 @@ class HomeController extends Controller
         if(!$user){
             return response([
                 'message' => 'Maaf email tidak terdaftar!'
-            ], 404);
+            ], 401);
         }else if(!Hash::check($request->password, $user->password)){
             return response([
                 'message' => 'Password salah!'
@@ -33,14 +33,14 @@ class HomeController extends Controller
 
     public function register(Request $request){
         $validate = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'name' => 'bail|required',
+            'email' => 'bail|required|email|unique:users',
             'password' => 'required|min:5'
         ]);
 
         if($validate->fails()){
            return response([
-               'message' => $validate->errors()
+               'message' => $validate->errors()->first()
            ], 402);
         }
 

@@ -22,6 +22,6 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get('/users', 'HomeController@users');
 });
 
-Route::post('login', 'HomeController@login');
-Route::post('register', 'HomeController@register');
-Route::get('logout', 'HomeController@logout');
+Route::post('/login', 'HomeController@login');
+Route::post('/register', 'HomeController@register');
+Route::get('/logout', 'HomeController@logout');
